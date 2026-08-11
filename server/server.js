@@ -1,15 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const cors = require('cors');
 
-app.use(cors({
-  origin: '*', // Allows requests from any frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
-}));
+// Enable CORS for all routes and origins
+app.use(cors()); 
 app.use(express.json());
 
 // 1. Connect to MongoDB Atlas
