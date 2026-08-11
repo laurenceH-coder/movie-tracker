@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/movie-tracker/static/css/main.ad9d8538.css",
+    "main.js": "/movie-tracker/static/js/main.7ab3065c.js",
+    "index.html": "/movie-tracker/index.html",
+    "main.ad9d8538.css.map": "/movie-tracker/static/css/main.ad9d8538.css.map",
+    "main.7ab3065c.js.map": "/movie-tracker/static/js/main.7ab3065c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad9d8538.css",
+    "static/js/main.7ab3065c.js"
+  ]
+}
