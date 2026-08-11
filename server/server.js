@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+const cors = require('cors');
+
 app.use(cors({
-  origin: ['https://laurenceH-coder.github.io', 'http://localhost:3000'],
+  origin: '*', // Allows requests from any frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
