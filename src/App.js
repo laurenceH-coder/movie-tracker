@@ -3,6 +3,9 @@ import MovieForm from './Components/MovieForm';
 import MovieCard from './Components/MovieCard';
 import './App.css';
 
+// Store your API base URL in a variable
+const API_BASE_URL = "https://movie-tracker-jr2j.onrender.com";
+
 function App() {
   const movieLimit = 100;
   const [usernameState, setUsername] = useState("");
@@ -17,7 +20,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(`[https://movie-tracker-jr2j.onrender.com](https://movie-tracker-jr2j.onrender.com)/api/users/${usernameState}/movies`);
+      const response = await fetch(`${API_BASE_URL}/api/users/${usernameState}/movies`);
       const data = await response.json();
       setMovies(data);
       setIsLoggedIn(true);
@@ -32,7 +35,7 @@ function App() {
     setMovies(updatedMovies);
     if (isLoggedIn) {
       try {
-        await fetch(`[https://movie-tracker-jr2j.onrender.com](https://movie-tracker-jr2j.onrender.com)/api/users/${usernameState}/movies`, {
+        await fetch(`${API_BASE_URL}/api/users/${usernameState}/movies`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ movies: updatedMovies })
