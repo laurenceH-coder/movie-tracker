@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Movie Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack movie watchlist app — add films, mark them watched, rate them, and sort your list — with a username-based login and cloud persistence via MongoDB.
 
-## Available Scripts
+**Live demo:** https://laurenceH-coder.github.io/movie-tracker
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Username-based accounts** — enter a username to load (or automatically create) a personal watchlist; no password/auth flow, just per-user data storage
+- **Add, watch-toggle, delete, and rate movies** from a simple form/card UI
+- **Sorting** — order the list by title, genre, rating, or watched status
+- **Persistent storage** — the list is saved to MongoDB Atlas via a small Express API, so it's there next time you log in from anywhere
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Layer | Tools |
+|---|---|
+| Frontend | React, deployed to GitHub Pages |
+| Backend | Node.js, Express |
+| Database | MongoDB Atlas (via Mongoose) |
+| Hosting | Frontend on GitHub Pages, API on Render |
 
-### `npm test`
+## Architecture
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+React app (GitHub Pages)
+        │  fetch()
+        ▼
+Express API (Render) ── Mongoose ──▶ MongoDB Atlas
+```
 
-### `npm run build`
+The frontend talks to a REST API with two endpoints:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `GET /api/users/:username/movies` — fetch (or lazily create) a user's list
+- `PUT /api/users/:username/movies` — overwrite a user's list with the current state
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running it locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend
 
-### `npm run eject`
+```bash
+cd server
+npm install
+cp .env.example .env   # then fill in your own MONGO_URI
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Frontend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+By default the frontend points at the deployed API (`API_BASE_URL` in `src/App.js`) — change that constant to `http://localhost:5000` to run fully locally against your own backend.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Known limitations
 
-## Learn More
+- Login is username-only with no password — it's a personal-project convenience, not an auth system. Don't reuse this pattern for anything that needs real access control.
+- No input validation/rate limiting on the API yet.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT — see [LICENSE](LICENSE).
